@@ -30,6 +30,7 @@ class ProductList(ListView):
 class ProductDetail(DetailView):
   model = Product
   pk_url_kwarg = 'id'
+  template_name = 'products/product.html'
 
 class ProductCreate(CreateView):
   model = Product
