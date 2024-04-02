@@ -1,2 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/products.module.css' %}">
+{% endblock %}
+
+{% block content %}
+  <section class="dashboard-count">
+    <div class="dashboard-card">
+      <h3 class="card-title">Products in Stock</h3>
+      <span class="card-text">{{ quantity_in_stock }}</span>
+    </div>
+    <div class="dashboard-card">
+      <h3 class="card-title">Products Sold</h3>
+      <span class="card-text">{{ quantity_sold }}</span>
+    </div>
+    <div class="dashboard-card">
+      <h3 class="card-title">Total</h3>
+      <span class="card-text">{{ sales_total }}</span>
+    </div>
+  </section>
+
+  <section class="products-container">
+    {% for product in page_obj %}
+      <div class="product-container">
+        <img class="product-image" src="media/{{ product.image }}" alt="Product image">
+        <div class="product-data">
+          <h3 class="product-title">{{ product.title }}</h3>
+          <span class="product-price">{{ product.price }} <strong>R$</strong></span>
+        </div>
+        <div class="product-actions">
+          <a class="action detail" href="{% url 'product-detail' product.id %}">Detail</a>
+          <a class="action edit" href="{% url 'product-edit' product.id %}">Edit</a>
+          <a class="action delete" href="{% url 'product-delete' product.id %}">Delete</a>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}
