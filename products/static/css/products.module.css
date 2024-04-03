@@ -69,14 +69,18 @@
 .product-actions {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .action {
+  cursor: pointer;
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
   color: #e5e5e5;
+  font-size: 1rem;
 }
 
 .detail {
@@ -84,9 +88,88 @@
 }
 
 .edit {
-  background-color: #0C1;
+  background-color: #06F;
 }
 
 .delete {
   background-color: #F20;
+}
+
+.sell {
+  background-color: #0C1;
+}
+
+.stock {
+  background-color: #0C1;
+}
+
+
+
+.background {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background-color: #fff;
+  padding: 2rem;
+  border: 2px solid #e5e5e5;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-title {
+  font-size: 2rem;
+}
+
+.modal-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #DDD;
+}
+
+.modal-subcontainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #DDD;
+  border-radius: 2px;
+}
+
+.form-error {
+  font-size: 0.875rem;
+  color: #F02;
+}
+
+.modal-button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  color: #e5e5e5;
+  font-size: 1rem;
+  font-weight: 700;
+  flex: 1;
+}
+
+.add {
+  background-color: #0C1;
+}
+
+.remove {
+  background-color: #F20;
+}
+
+.disapear {
+  display: none;
 }

@@ -1,0 +1,23 @@
+{% extends 'products/products.html' %}
+
+{% block modal %}
+<div id="background" class="background">
+  <form method="post" id="modal" class="modal-container">
+    {% csrf_token %}
+    <span id="modal-title" class="modal-title">Edit {{ type }}</span>
+    {% if type == 'Sell' %}
+      {{ form.quantity_sold }}
+      <span class="form-error">{{ errors.quantity_in_stock }}</span>
+      <span class="form-error">{{ errors.quantity_sold }}</span>
+    {% else %}
+      {{ form.quantity_in_stock }}
+      <span class="form-error">{{ errors.quantity_in_stock }}</span>
+    {% endif %}
+    <input type="hidden" name="action-type" id="hidden">
+    <div class="modal-subcontainer">
+      <button class="modal-button add">Add</button>
+      <button class="modal-button remove">Remove</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

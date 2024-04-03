@@ -1,3 +1,4 @@
+from typing import Any
 from django import forms
 from .models import Product
 
@@ -14,3 +15,46 @@ class ProductForm(forms.ModelForm):
       'quantity_in_stock': forms.NumberInput(attrs={'class': 'form-input'}),
       'quantity_sold': forms.NumberInput(attrs={'class': 'form-input'}),
     }
+
+class ProductSellForm(forms.ModelForm):
+
+  class Meta:
+    model = Product
+    fields = ('quantity_sold', 'quantity_in_stock')
+    widgets = {
+      'quantity_sold': forms.NumberInput(attrs={'class': 'form-input'}),
+      'quantity_in_stock': forms.NumberInput(attrs={'class': 'form-input'}),
+    }
+  
+  def clean(self):
+    cleaned_data = super().clean()
+    
+    quantity_sold = cleaned_data.get('quantity_sold')
+    quantity_in_stock = cleaned_data.get('quantity_in_stock')
+
+    if quantity_in_stock < 0:
+      msg = "There is not enought items in stock"
+      self.add_error('quantity_in_stock', msg)
+    if quantity_sold < 0:
+      msg = "Sales cannot be negative"
+      self.add_error('quantity_sold', msg)
+    
+    return cleaned_data
+
+class ProductStockForm(forms.ModelForm):
+
+  class Meta:
+    model = Product
+    fields = ('quantity_in_stock',)
+    widgets = {
+      'quantity_in_stock': forms.NumberInput(attrs={'class': 'form-input'}),
+    }
+
+  def clean(self):
+    cleaned_data = super().clean()
+    
+    quantity_in_stock = cleaned_data.get('quantity_in_stock')
+
+    if quantity_in_stock < 0:
+      msg = "Stock cannot be negative"
+      self.add_error('quantity_in_stock', msg)

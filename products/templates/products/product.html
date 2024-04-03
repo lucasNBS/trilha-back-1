@@ -18,8 +18,8 @@
       <div class="product-info">
         <p class="product-description">{{ product.description }}</p>
         <div class="product-actions">
-          <a class="action edit" href="">Edit</a>
-          <a class="action delete" href="">Delete</a>
+          <a class="action edit" href="{% url 'product-edit' product.id %}">Edit</a>
+          <a class="action delete" href="{% url 'product-delete' product.id %}">Delete</a>
         </div>
       </div>
     </div>

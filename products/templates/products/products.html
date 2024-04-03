@@ -3,6 +3,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/products.module.css' %}">
+  <script src="{% static 'js/modal.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -24,7 +25,7 @@
   <section class="products-container">
     {% for product in page_obj %}
       <div class="product-container">
-        <img class="product-image" src="media/{{ product.image }}" alt="Product image">
+        <img class="product-image" src="../../media/{{ product.image }}" alt="Product image">
         <div class="product-data">
           <h3 class="product-title">{{ product.title }}</h3>
           <span class="product-price"><strong>Price:</strong> {{ product.price }} R$</span>
@@ -35,9 +36,26 @@
           <a class="action detail" href="{% url 'product-detail' product.id %}">Detail</a>
           <a class="action edit" href="{% url 'product-edit' product.id %}">Edit</a>
           <a class="action delete" href="{% url 'product-delete' product.id %}">Delete</a>
+          <a
+            class="action sell modal"
+            data-type="Sell"
+            href="{% url 'product-sell' product.id %}"
+          >
+            Sell
+          </a>
+          <a
+            class="action stock modal"
+            data-type="Stock"
+            href="{% url 'product-stock' product.id %}"
+          >
+            Stock
+          </a>
         </div>
       </div>
     {% endfor %}
   </section>
+
+  {% block modal %}
+  {% endblock %}
 {% endblock %}
 
