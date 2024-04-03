@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/globals.module.css' %}">
+  <link rel="stylesheet" href="{% static 'css/confirm_delete.module.css' %}">
+  <title>Django - CRM</title>
+</head>
+<body>
+  <form method="post" class="form-container">
+    {% csrf_token %}
+    <h2 class="form-title">This action will delete {{ product.title }}</h2>
+    <button class="form-button" type="submit">Ok</button>
+  </form>
+</body>
+</html>
