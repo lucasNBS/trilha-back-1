@@ -27,6 +27,7 @@
 
 .product-image {
   object-fit: contain;
+  aspect-ratio: 3 / 4;
 }
 
 .product-price, .product-stock, .product-sold {

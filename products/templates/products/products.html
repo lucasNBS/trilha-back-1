@@ -27,7 +27,9 @@
         <img class="product-image" src="media/{{ product.image }}" alt="Product image">
         <div class="product-data">
           <h3 class="product-title">{{ product.title }}</h3>
-          <span class="product-price">{{ product.price }} <strong>R$</strong></span>
+          <span class="product-price"><strong>Price:</strong> {{ product.price }} R$</span>
+          <span class="product-stock"><strong>Stock:</strong> {{ product.quantity_in_stock }}</span>
+          <span class="product-sold"><strong>Sold:</strong> {{ product.quantity_sold }}</span>
         </div>
         <div class="product-actions">
           <a class="action detail" href="{% url 'product-detail' product.id %}">Detail</a>

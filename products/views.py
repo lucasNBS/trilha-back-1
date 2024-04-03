@@ -1,7 +1,9 @@
 from typing import Any
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .models import Product
+from .forms import ProductForm
 
 # Create your views here.
 class ProductList(ListView):
@@ -34,11 +36,18 @@ class ProductDetail(DetailView):
 
 class ProductCreate(CreateView):
   model = Product
+  form_class = ProductForm
+  template_name = 'products/form.html'
+  success_url = reverse_lazy('product-list')
 
 class ProductUpdate(UpdateView):
   model = Product
+  form_class = ProductForm
   pk_url_kwarg = 'id'
+  template_name = 'products/form.html'
+  success_url = reverse_lazy('product-list')
 
 class ProductDelete(DeleteView):
   model = Product
   pk_url_kwarg = 'id'
+  success_url = reverse_lazy('product-list')

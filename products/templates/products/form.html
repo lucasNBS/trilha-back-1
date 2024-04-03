@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/form.module.css' %}">
+  <script src="{% static 'js/form.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="form-container" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-subcontainer small">
+      <label class="form-label">Image</label>
+      <div class="image-container">
+        {% if product.image %}
+          <img
+            class="form-image-preview"
+            id="image_preview"
+            src="../../media/{{ product.image }}"
+            alt="Product image"
+          >
+        {% else %}
+          <img
+            class="form-image-preview"
+            id="image_preview"
+            src="../../media/images/no-image.jpg"
+            alt="Product image"
+          >
+        {% endif %}
+        {{ form.image }}
+        <span class="form-error">{{ form.errors.image }}</span>
+      </div>
+    </div>
+    <div class="form-subcontainer big">
+      <div class="form-group">
+        <label class="form-label">Title</label>
+        {{ form.title }}
+        <span class="form-error">{{ form.errors.title }}</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Price</label>
+        {{ form.price }}
+        <span class="form-error">{{ form.errors.price }}</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Stock</label>
+        {{ form.quantity_in_stock }}
+        <span class="form-error">{{ form.errors.quantity_in_stock }}</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Sold</label>
+        {{ form.quantity_sold }}
+        <span class="form-error">{{ form.errors.quantity_sold }}</span>
+      </div>
+      <div class="form-group large">
+        <label class="form-label">Description</label>
+        {{ form.description }}
+        <span class="form-error">{{ form.errors.description }}</span>
+      </div>
+      <button class="form-button" type="submit">Save</button>
+    </div>
+  </form>
+{% endblock %}

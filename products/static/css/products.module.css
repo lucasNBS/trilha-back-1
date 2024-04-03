@@ -34,8 +34,8 @@
 }
 
 .product-container {
-  background-color: #e5e5e5;
   padding: 1.5rem;
+  border: 2px solid #e5e5e5;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -64,14 +64,6 @@
 
 .product-title {
   font-size: 1.5rem;
-}
-
-.product-price {
-  font-size: 1.125rem;
-}
-
-.product-price strong {
-  font-size: 1.25rem;
 }
 
 .product-actions {
