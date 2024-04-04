@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -24,8 +25,30 @@ class ProductList(ListView):
   paginate_by = 5
   template_name = 'products/products.html'
 
+  def get_queryset(self):
+    queryset = super().get_queryset()
+
+    price_min = self.request.GET.get('price-min')
+    price_max = self.request.GET.get('price-max')
+
+    if price_min == '' or price_min == None:
+      price_min = 0
+    else:
+      queryset = queryset.filter(price__gte=price_min)
+
+    if price_max != '' and price_max != None:
+      queryset = queryset.filter(price__lte=price_max)
+
+    return queryset
+
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
+
+    price_min = self.request.GET.get('price-min')
+    price_max = self.request.GET.get('price-max')
+
+    context['price_min'] = price_min
+    context['price_max'] = price_max
 
     overview_data(context)
 

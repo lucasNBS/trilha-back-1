@@ -27,7 +27,7 @@
 
 .products-container {
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 1.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
   gap: 1rem;
@@ -207,4 +207,17 @@
   background-color: #06F;
   border: 1px solid #e5e5e5;
   color: #e5e5e5;
+}
+
+.form-container {
+  margin-top: 3rem;
+}
+
+.form-button {
+  cursor: pointer;
+  background-color: #06F;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: #e5e5e5;
+  font-weight: 700;
 }

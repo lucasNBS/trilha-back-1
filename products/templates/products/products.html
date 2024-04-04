@@ -22,6 +22,12 @@
     </div>
   </section>
 
+  <form class="form-container">
+    <input type="number" name="price-min" class="form-input" placeholder="Min price" value="{{ price_min }}">
+    <input type="number" name="price-max" class="form-input" placeholder="Max price" value="{{ price_max }}">
+    <button class="form-button">Search</button>
+  </form>
+
   <section class="products-container">
     {% for product in page_obj %}
       <div class="product-container">
@@ -57,19 +63,19 @@
   
   <div class="nav-pages-container">
     {% if page_obj.has_previous %}
-      <a href="/?page={{ page_obj.previous_page_number }}" class="nav-button">Previous</a>
+      <a href="/?page={{ page_obj.previous_page_number }}&price-min={{ price_min }}&price-max={{ price_max }}" class="nav-button">Previous</a>
     {% endif %}
 
     {% for page in page_obj.paginator.page_range %}
       {% if page_obj.number == page %}
-        <a href="/?page={{ page }}" class="nav-number selected">{{ page }}</a>
+        <a href="/?page={{ page }}&price-min={{ price_min }}&price-max={{ price_max }}" class="nav-number selected">{{ page }}</a>
       {% else %}
-        <a href="/?page={{ page }}" class="nav-number">{{ page }}</a>
+        <a href="/?page={{ page }}&price-min={{ price_min }}&price-max={{ price_max }}" class="nav-number">{{ page }}</a>
       {% endif %}
     {% endfor %}
 
     {% if page_obj.has_next %}
-      <a href="/?page={{ page_obj.next_page_number }}" class="nav-button">Next</a>
+      <a href="/?page={{ page_obj.next_page_number }}&price-min={{ price_min }}&price-max={{ price_max }}" class="nav-button">Next</a>
     {% endif %}
   </div>
 
