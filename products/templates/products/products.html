@@ -42,20 +42,20 @@
           <a class="action detail" href="{% url 'product-detail' product.id %}">Detail</a>
           <a class="action edit" href="{% url 'product-edit' product.id %}">Edit</a>
           <a class="action delete" href="{% url 'product-delete' product.id %}">Delete</a>
-          <a
+          <button
             class="action sell modal"
             data-type="Sell"
-            href="{% url 'product-sell' product.id %}"
+            data-id="{{ product.id }}"
           >
             Sell
-          </a>
-          <a
+          </button>
+          <button
             class="action stock modal"
             data-type="Stock"
-            href="{% url 'product-stock' product.id %}"
+            data-id="{{ product.id }}"
           >
             Stock
-          </a>
+          </button>
         </div>
       </div>
     {% endfor %}
@@ -79,7 +79,8 @@
     {% endif %}
   </div>
 
-  {% block modal %}
-  {% endblock %}
+  <div id="background" class="background disapear">
+    <iframe id="modal-frame" class="modal-container disapear" frameborder="0"></iframe>
+  </div>
 {% endblock %}
 

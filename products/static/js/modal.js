@@ -1,22 +1,23 @@
+const buttons = document.querySelectorAll(".modal")
+const modalFrame = document.querySelector("#modal-frame")
+
+buttons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    modalFrame.classList.remove('disapear')
+    background.classList.remove('disapear')
+    
+    const type = e.target.dataset.type.toLowerCase()
+    modalFrame.src = `products/${e.target.dataset.id}/${type}`
+  })
+})
+
 const background = document.querySelector("#background")
-const modal = document.querySelector("#modal")
 
 background.addEventListener("click", () => {
-  window.location.href = '/'
+  modalFrame.classList.add('disapear')
+  background.classList.add('disapear')
 })
 
-modal.addEventListener("click", (e) => {
+modalFrame.addEventListener("click", (e) => {
   e.stopPropagation()
-})
-
-const hidden = document.querySelector('#hidden')
-const add = document.querySelector('.add')
-const remove = document.querySelector('.remove')
-
-add.addEventListener("click", (e) => {
-  hidden.value = e.target.innerText
-})
-
-remove.addEventListener("click", (e) => {
-  hidden.value = e.target.innerText
 })

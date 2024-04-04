@@ -103,7 +103,11 @@
   background-color: #0C1;
 }
 
-
+.form-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #DDD;
+  border-radius: 2px;
+}
 
 .background {
   background-color: rgba(0, 0, 0, 0.6);
@@ -116,6 +120,8 @@
 
 .modal-container {
   background-color: #fff;
+  width: 300px;
+  height: 230px;
   padding: 2rem;
   border: 2px solid #e5e5e5;
   border-radius: 4px;
@@ -123,55 +129,6 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-}
-
-.modal-title {
-  font-size: 1.5rem;
-}
-
-.modal-title {
-  font-size: 2rem;
-}
-
-.modal-input {
-  padding: 0.5rem 1rem;
-  border: 1px solid #DDD;
-}
-
-.modal-subcontainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.form-input {
-  padding: 0.5rem 1rem;
-  border: 1px solid #DDD;
-  border-radius: 2px;
-}
-
-.form-error {
-  font-size: 0.875rem;
-  color: #F02;
-}
-
-.modal-button {
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  color: #e5e5e5;
-  font-size: 1rem;
-  font-weight: 700;
-  flex: 1;
-}
-
-.add {
-  background-color: #0C1;
-}
-
-.remove {
-  background-color: #F20;
 }
 
 .disapear {

@@ -47,6 +47,11 @@ class ProductList(ListView):
     price_min = self.request.GET.get('price-min')
     price_max = self.request.GET.get('price-max')
 
+    if price_min == None:
+      price_min = ''
+    if price_max == None:
+      price_max = ''
+
     context['price_min'] = price_min
     context['price_max'] = price_max
 
@@ -83,7 +88,7 @@ def ProductSell(request, id):
   product_quantity_sold = product.quantity_sold
   product_quantity_stock = product.quantity_in_stock
 
-  form = ProductSellForm()
+  form = ProductSellForm(instance=product)
   errors = form.errors
 
   action_type = request.POST.get('action-type')
@@ -107,14 +112,13 @@ def ProductSell(request, id):
       form = ProductSellForm(instance=product)
       return redirect('product-list')
     else:
-      form = ProductSellForm()
-
+      return redirect('product-list')
+    
   context = {
     'product': product,
     'form': form,
     'errors': errors,
     'type': 'Sell',
-    'page_obj': Product.objects.all()
   }
 
   overview_data(context)
@@ -154,7 +158,6 @@ def ProductStock(request, id):
     'form': form,
     'errors': errors,
     'type': 'Stock',
-    'page_obj': Product.objects.all()
   }
 
   overview_data(context)
