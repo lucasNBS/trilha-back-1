@@ -126,6 +126,10 @@
 }
 
 .modal-title {
+  font-size: 1.5rem;
+}
+
+.modal-title {
   font-size: 2rem;
 }
 
@@ -172,4 +176,35 @@
 
 .disapear {
   display: none;
+}
+
+.nav-pages-container {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-button {
+  width: max-content;
+  background-color: #06F;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: #e5e5e5;
+}
+
+.nav-number {
+  height: 34px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #06F;
+  border-radius: 4px;
+  color: #06F;
+}
+
+.selected {
+  background-color: #06F;
+  border: 1px solid #e5e5e5;
+  color: #e5e5e5;
 }

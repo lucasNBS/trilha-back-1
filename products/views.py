@@ -21,7 +21,7 @@ def overview_data(context):
 # Create your views here.
 class ProductList(ListView):
   model = Product
-  paginate_by = 10
+  paginate_by = 5
   template_name = 'products/products.html'
 
   def get_context_data(self, **kwargs):
@@ -87,6 +87,7 @@ def ProductSell(request, id):
       form = ProductSellForm()
 
   context = {
+    'product': product,
     'form': form,
     'errors': errors,
     'type': 'Sell',
@@ -126,6 +127,7 @@ def ProductStock(request, id):
       form = ProductStockForm()
 
   context = {
+    'product': product,
     'form': form,
     'errors': errors,
     'type': 'Stock',

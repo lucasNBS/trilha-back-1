@@ -4,6 +4,7 @@
 <div id="background" class="background">
   <form method="post" id="modal" class="modal-container">
     {% csrf_token %}
+    <span id="modal-title" class="modal-product">{{ product.title }}</span>
     <span id="modal-title" class="modal-title">Edit {{ type }}</span>
     {% if type == 'Sell' %}
       {{ form.quantity_sold }}
