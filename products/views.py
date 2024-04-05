@@ -1,4 +1,5 @@
 from django.db.models.query import QuerySet
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -88,7 +89,7 @@ def ProductSell(request, id):
   product_quantity_sold = product.quantity_sold
   product_quantity_stock = product.quantity_in_stock
 
-  form = ProductSellForm(instance=product)
+  form = ProductSellForm()
   errors = form.errors
 
   action_type = request.POST.get('action-type')
@@ -110,9 +111,9 @@ def ProductSell(request, id):
     if form.is_valid():
       form.save()
       form = ProductSellForm(instance=product)
-      return redirect('product-list')
+      return HttpResponse('<script>window.parent.document.querySelector("#modal-frame").src = "";window.parent.document.querySelector("#background").classList.add("disapear");window.parent.window.location.reload();</script>')
     else:
-      return redirect('product-list')
+      form = ProductSellForm()
     
   context = {
     'product': product,
@@ -149,7 +150,7 @@ def ProductStock(request, id):
     if form.is_valid():
       form.save()
       form = ProductStockForm(instance=product)
-      return redirect('product-list')
+      return HttpResponse('<script>window.parent.document.querySelector("#modal-frame").src = "";window.parent.document.querySelector("#background").classList.add("disapear");window.parent.window.location.reload();</script>')
     else:
       form = ProductStockForm()
 
