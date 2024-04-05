@@ -12,6 +12,7 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   flex: 1.5;
+  z-index: 1;
 }
 
 .nav-container, .nav-list {
@@ -35,4 +36,31 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   flex: 9;
+}
+
+@media screen and (max-width: 1024px) {
+  .aside-container {
+    flex: 1;
+  }
+
+  .main-container {
+    flex: 4;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    flex-direction: column;
+  }
+
+  .aside-container {
+    padding: 2rem;
+    position: sticky;
+    top: 0px;
+    flex: 0;
+  }
+
+  .nav-list {
+    flex-direction: row;
+  }
 }

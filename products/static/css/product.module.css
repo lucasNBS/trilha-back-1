@@ -30,6 +30,12 @@
   aspect-ratio: 3 / 4;
 }
 
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .product-price, .product-stock, .product-sold {
   font-size: 1.25rem;
 }
@@ -68,4 +74,30 @@
 
 .delete {
   background-color: #F20;
+}
+
+@media screen and (max-width: 1024px) {
+  .product-data {
+    flex-direction: column;
+  }
+
+  .product-image-container {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .product-image,
+  .product-details {
+    flex: 1;
+  }
+
+  .product-info {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .product-image-container {
+    flex-direction: column;
+  }
 }

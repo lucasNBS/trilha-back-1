@@ -11,9 +11,11 @@
     <div class="product-data">
       <div class="product-image-container">
         <img class="product-image" src="../media/{{ product.image }}" alt="Product image">
-        <span class="product-price"><strong>Price:</strong> {{ product.price }} R$</span>
-        <span class="product-stock"><strong>Stock:</strong> {{ product.quantity_in_stock }}</span>
-        <span class="product-sold"><strong>Sold:</strong> {{ product.quantity_sold }}</span>
+        <div class="product-details">
+          <span class="product-price"><strong>Price:</strong> {{ product.price }} R$</span>
+          <span class="product-stock"><strong>Stock:</strong> {{ product.quantity_in_stock }}</span>
+          <span class="product-sold"><strong>Sold:</strong> {{ product.quantity_sold }}</span>
+        </div>
       </div>
       <div class="product-info">
         <p class="product-description">{{ product.description }}</p>
