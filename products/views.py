@@ -1,7 +1,5 @@
-from django.db.models.query import QuerySet
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from products.mixins import ProductModalMixin
 from django.urls import reverse_lazy
 from .models import Product
 from .forms import ProductForm, ProductSellForm, ProductStockForm
@@ -84,18 +82,18 @@ class ProductDelete(DeleteView):
   template_name = 'pages/confirm_delete.html'
   success_url = reverse_lazy('product-list')
 
-def ProductSell(request, id):
-  product = get_object_or_404(Product, id=id)
-  product_quantity_sold = product.quantity_sold
-  product_quantity_stock = product.quantity_in_stock
+class ProductSell(ProductModalMixin):
+  model = Product
+  form_class = ProductSellForm
+  type = 'Sell'
 
-  form = ProductSellForm()
-  errors = form.errors
+  def post(self, request, *args, **kwargs):
+    product_quantity_sold = self.get_object().__getattribute__('quantity_sold')
+    product_quantity_stock = self.get_object().__getattribute__('quantity_in_stock')
 
-  action_type = request.POST.get('action-type')
-  quantity = request.POST.get('quantity_sold')
-
-  if request.method == 'POST':
+    action_type = request.POST.get('action-type')
+    quantity = request.POST.get('quantity_sold')
+    
     post = request.POST.copy()
 
     if action_type == 'Add':
@@ -104,63 +102,29 @@ def ProductSell(request, id):
     if action_type == 'Remove':
       post.update({'quantity_sold': product_quantity_sold - float(quantity)})
       post.update({'quantity_in_stock': product_quantity_stock + float(quantity)})
-
-    request.POST = post
-    form = ProductSellForm(request.POST, instance=product)
-    errors = form.errors
-    if form.is_valid():
-      form.save()
-      form = ProductSellForm(instance=product)
-      return HttpResponse('<script>window.parent.document.querySelector("#modal-frame").src = "";window.parent.document.querySelector("#background").classList.add("disapear");window.parent.window.location.reload();</script>')
-    else:
-      form = ProductSellForm()
     
-  context = {
-    'product': product,
-    'form': form,
-    'errors': errors,
-    'type': 'Sell',
-  }
+    request.POST = post
 
-  overview_data(context)
+    return super().post(request, *args, **kwargs)
 
-  return render(request, 'products/modal.html', context)
+class ProductStock(ProductModalMixin):
+  model = Product
+  form_class = ProductStockForm
+  type = 'Stock'
 
-def ProductStock(request, id):
-  product = get_object_or_404(Product, id=id)
-  product_quantity_stock = product.quantity_in_stock
+  def post(self, request, *args, **kwargs):
+    product_quantity_stock = self.get_object().__getattribute__('quantity_in_stock')
 
-  form = ProductStockForm()
-  errors = form.errors
-
-  action_type = request.POST.get('action-type')
-  quantity = request.POST.get('quantity_in_stock')
-
-  if request.method == 'POST':
+    action_type = request.POST.get('action-type')
+    quantity = request.POST.get('quantity_in_stock')
+    
     post = request.POST.copy()
 
     if action_type == 'Add':
       post.update({'quantity_in_stock': product_quantity_stock + float(quantity)})
     if action_type == 'Remove':
       post.update({'quantity_in_stock': product_quantity_stock - float(quantity)})
-
+    
     request.POST = post
-    form = ProductStockForm(request.POST, instance=product)
-    errors = form.errors
-    if form.is_valid():
-      form.save()
-      form = ProductStockForm(instance=product)
-      return HttpResponse('<script>window.parent.document.querySelector("#modal-frame").src = "";window.parent.document.querySelector("#background").classList.add("disapear");window.parent.window.location.reload();</script>')
-    else:
-      form = ProductStockForm()
 
-  context = {
-    'product': product,
-    'form': form,
-    'errors': errors,
-    'type': 'Stock',
-  }
-
-  overview_data(context)
-
-  return render(request, 'products/modal.html', context)
+    return super().post(request, *args, **kwargs)
